@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПРИКОЛЫ</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&family=Seymour+One&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav>
+
+        <div class = "navDiv">
+            <a href="index.html" class = "navA">главная</a>
+        </div>
+
+        <button class="navBtn" id="profileButton">профиль</button>
+
+
+    </nav>
+
+    <div class = "mainFrame">
+
+        <div class = "rotated" id = "leftIt" onclick="slideLeft()">
+        <h2>ХЕХЕ</h2>
+        <span>ЛЕВЫЙ</span>
+        </div>
+        <div class = "rotated" id = "centerIt" onclick="toggleSize()">
+        <div id="contentIt">
+            <div id="teamname">
+                <h2>ХЕХЕ</h2>
+            </div>
+            <div id="teamdisc">
+                <span>ЦЕНТР</span>
+            </div>
+        </div>
+        </div>
+        <div class = "rotated" id = "rightIt" onclick="slideRight()">
+        <h2>ХЕХЕ</h2>
+        <span>ПРАВЫЙ</span>
+        </div>
+
+    </div>
+
+    <script>
+
+
+        document.getElementById("profileButton").onclick = function() {
+            // Проверяем, активна ли сессия пользователя
+            if (localStorage.getItem('loggedIn') === 'true') {
+                // Если сессия активна, перенаправляем на страницу profile.html
+                window.location.href = 'profile.html';
+            } else {
+                // Если сессия не активна, перенаправляем на страницу login.html
+                window.location.href = 'aut.html';
+            }
+        };
+
+
+    // Функция для изменения размера центрального элемента
+        // Функция для изменения размера центрального элемента
+        function toggleSize(element) {
+            const centerItem = document.getElementById('centerIt');
+            if (centerItem.classList.contains('centerOpen')) {
+                centerItem.classList.remove('centerOpen'); // Уменьшаем размер
+            } else {
+                centerItem.classList.add('centerOpen'); // Увеличиваем размер
+            }
+        }
+
+        function toggleSize() {
+            const centerItem = document.getElementById('centerIt');
+            const left = document.getElementById('leftIt');
+            const right = document.getElementById('rightIt');
+            centerItem.classList.toggle('fullWidth');
+            left.classList.toggle('hiden');
+            right.classList.toggle('hiden');
+        }
+
+        // JavaScript-код для функций slideLeft() и slideRight() здесь
+        const names = ['team 1', 'team 2', 'team 3', 'team 4', 'team 5', 'team 6']
+        const colors = ['blue', 'green', 'yellow', 'orange', 'purple', 'pink']; // Массив цветов
+        const texts = ['Text 1', 'Text 2', 'Text 3', 'Text 4', 'Text 5', 'Text 6']; // Массив текстов
+        let currentIndex = 0; // Индекс текущего элемента
+
+        function slideLeft() {
+            currentIndex = (currentIndex === 0) ? texts.length - 1 : currentIndex - 1; // Обновляем индекс
+            updateCarousel(); // Обновляем карусель
+        }
+
+        function slideRight() {
+            currentIndex = (currentIndex === texts.length - 1) ? 0 : currentIndex + 1; // Обновляем индекс
+            updateCarousel(); // Обновляем карусель
+        }
+
+        // Функция для обновления цветов и текстов карусели
+        function updateCarousel() {
+            const rotatedItems = document.querySelectorAll('.rotated');
+            rotatedItems.forEach((item, index) => {
+                const nameIndex = (currentIndex + index) % names.length;
+                const colorIndex = (currentIndex + index) % colors.length; // Вычисляем индекс цвета
+                const textIndex = (currentIndex + index) % texts.length; // Вычисляем индекс текста
+                item.style.backgroundColor = colors[colorIndex]; // Устанавливаем цвет фона
+                item.querySelector('span').textContent = texts[textIndex]; // Устанавливаем текст
+                item.querySelector('h2').textContent = names[nameIndex];
+            });
+        }
+
+        // Инициализация карусели
+        updateCarousel();
+    </script>
+
+  </body>
+</html>

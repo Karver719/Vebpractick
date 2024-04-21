@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleProfile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+
+  <nav>
+
+      <div class = "navDiv">
+        <a href="index.html" class = "navA">главная</a>
+      </div>
+      <button id="profileButton" class="navBtn">профиль</button>
+      <button class="navBtn" id="exitBtn">выйти</button>
+
+  </nav>
+
+  
+
+    <div class="main">
+      <div class="bannerContainer">
+        <div class="banner"></div>
+      </div>
+      <div class="membersContainer">
+        <div class="membersArr">
+          <div class="plusMember">
+            <button id="showFormBtn" class="arayBtn marginBtn">Добавить участника</button>
+            
+      
+            <div id="formContainer" style="display: none;">
+              
+              <form>
+              <h2>Добавить участника</h2>
+              <input type="text" id="fio" placeholder="ФИО" name="fio"><br>
+              <input type="email" id="user_email" placeholder="Email" name="user_email"><br>
+              <textarea maxlength="256" cols="64" rows = "4" style="resize: none;" id="about" placeholder="О себе" name="about"></textarea><br>
+              <label for="avatar">Баннер (jpg или png):</label>
+              <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png">
+      
+              <button type="button" id="submitBtn">Отправить</button>
+              <button type="button" id="closeFormBtn">Закрыть</button>
+              </form>
+      
+            </div>
+          </div>
+        </div>
+        <div class="memberInf">
+          <div class="avatarContainer">
+            <img src='img/banner.jpg' class="avatar"></img>
+            <p>Fio</p>
+          </div>
+          <div class="about">
+            <textarea readonly="readonly" style="resize: none;" cols="128" class="textAbout"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const showFormBtn = document.getElementById('showFormBtn');
+      const formContainer = document.getElementById('formContainer');
+      const closeFormBtn = document.getElementById('closeFormBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      const exitBtn = document.getElementById('exitBtn');
+      
+      exitBtn.addEventListener('click', () => {
+        localStorage.setItem('loggedIn', 'false');
+        window.location.href = 'index.html';
+      });
+
+      showFormBtn.addEventListener('click', () => {
+        formContainer.style.display = 'block';
+      });
+
+      closeFormBtn.addEventListener('click', () => {
+        formContainer.style.display = 'none';
+      });
+
+    // Событие для кнопки отправки формы
+    submitBtn.addEventListener('click', () => {
+        // Создаем объект FormData из формы
+        const form = document.querySelector('form');
+        const formData = new FormData(form);
+
+        // Отправляем данные на сервер с использованием AJAX-запроса
+        fetch('/addMember', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => {
+            if (response.ok) {
+                // Закрываем форму после отправки
+                formContainer.style.display = 'none';
+                alert('Участник успешно добавлен!');
+            } else {
+                // Обрабатываем ошибку
+                alert('Ошибка при добавлении участника');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка при добавлении участника:', error);
+            alert('Ошибка при добавлении участника');
+        });
+    });
+
+    </script>
+  </body>
+</html>

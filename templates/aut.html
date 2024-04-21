@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="styleAut.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id = "mainFrame">
+<form id="loginForm">
+    <h2>Авторизация</h2>
+    <input type="text" name="name" placeholder="name" required>
+    <input type="password" name="password" placeholder="Пароль" required>
+    <input type="submit" value="Войти">
+    <p>Нет команды? <a href="registr.html">Создайте!</a></p>
+    <a href="index.html" class="return">На главную<a/>
+</form>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#loginForm').submit(function(event) {
+            event.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '/autForm', 
+                data: formData,
+                success: function(response) {
+                    console.log('Успешная авторизация');
+                    localStorage.setItem('loggedIn', 'true');
+                    window.location.href = 'index.html';
+                },
+                error: function(xhr, status, error) {
+                    console.error('Ошибка при авторизации:', status, error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Elements</title>
+    <style>
+        .flex-container {
+            position: relative; /* Позиционируем родительский контейнер */
+            width: 100%;
+            height: 100px; /* Задаем высоту для наглядности */
+            background-color: lightgray;
+            overflow: hidden; /* Скрываем все, что выходит за границы контейнера */
+        }
+
+        .flex-item {
+            position: absolute; /* Позиционируем абсолютно внутри родительского контейнера */
+            top: 0;
+            bottom: 0;
+            padding: 10px;
+            color: white;
+        }
+
+        .full-width-item {
+            left: 0; /* Позиционируем элемент, который должен занимать всю ширину, слева */
+            right: 0;
+            background-color: gray;
+        }
+
+        .flex-item:not(.full-width-item) {
+            display: none; /* Скрываем все остальные элементы */
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-container">
+        <div class="flex-item full-width-item">Flex Item 1 (Full Width)</div>
+        <div class="flex-item">Flex Item 2</div>
+        <div class="flex-item">Flex Item 3</div>
+    </div>
+</body>
+</html>

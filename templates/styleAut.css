@@ -1,0 +1,54 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 300;
+    color: black;
+    transition: 1s;
+}
+
+a:hover {
+    color: #5A6263;
+}
+
+.return {
+    font-size: 16px;
+}
+
+#mainFrame {
+    text-align: center;
+}
+
+#loginForm {
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Alegreya Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+#loginForm input[type="email"],
+#loginForm input[type="password"],
+#loginForm input[type="submit"] {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 0;
+    transition: 1s;
+}
+
+#loginForm input[type="submit"]:hover {
+    background-color: #724C9D;
+    color: white;
+}

@@ -1,0 +1,52 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#mainFrame {
+    text-align: center;
+}
+
+#registrationForm {
+    display: inline-block;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: "Alegreya Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 300;
+    color: black;
+    transition: 1s;
+}
+
+a:hover {
+    color: #5A6263;
+}
+
+#registrationForm input[type="text"],
+#registrationForm input[type="email"],
+#registrationForm input[type="password"],
+#registrationForm input[type="file"],
+#registrationForm input[type="submit"] {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 0;
+    transition: 1s;
+}
+
+#registrationForm input[type="submit"]:hover {
+    background-color: #724C9D;
+    color: white;
+}

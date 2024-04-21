@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="styleReg.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id = "mainFrame">
+    <form id="registrationForm">
+        <h2>Регистрация</h2>
+        <input type="text" id="name" name="name" placeholder="Название команды" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <input type="text" id="login" name="login" placeholder="Логин" required>
+        <input type="password" id="password" name="password" placeholder="Пароль" required>
+        
+        <label for="photo">Баннер:</label>
+        <input type="file" id="photo" name="photo" accept=".jpg,.jpeg,.png">
+
+    
+        <input type="submit" value="Зарегистрироваться">
+        <p>Есть команда? <a href="aut.html"> Войдите!</a></p>
+        <a href="index.html">На главную<a/>
+    </form>
+
+</div>
+
+<script>
+        $(document).ready(function() {
+        // При отправке формы
+        $('#registrationForm').submit(function(event) {
+            // Предотвращаем обычное поведение формы
+            event.preventDefault();
+
+            // Создаем объект FormData и добавляем в него данные формы
+            var formData = new FormData(this);
+
+            // Отправляем данные на сервер
+            $.ajax({
+                type: 'POST',
+                url: '/regForm',
+                data: formData,
+                contentType: false, // Установите contentType в false для отправки FormData
+                processData: false, // Установите processData в false для отправки данных формы как есть
+                success: function(response) {
+                    console.log('Успешно зарегистрировано');
+                    localStorage.setItem('loggedIn', 'true');
+                    window.location.href = 'index.html';
+                },
+                error: function(xhr, status, error) {
+                    console.error('Ошибка при регистрации:', status, error);
+                }
+            });
+        });
+    });
+
+</script>
+
+
+</body>
