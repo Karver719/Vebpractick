@@ -17,6 +17,8 @@ from models.sqfunc import add_new_team, add_new_user, getTeam, getUser
 # u_email = "EEEEva@gmail.com"
 # add_new_user(fio, user_photo, about, u_email)
 
-print( getTeam(1) )
+# Тянем данные по команде
+#print( getTeam(1) )
 
-print( getUser(1) )
+# Тянем данные по юзеру
+#print( getUser(1) )

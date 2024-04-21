@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      POSTGRES_DB: "main_base"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+      - frontend
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=main_base
+      - POSTGRES_USER=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
